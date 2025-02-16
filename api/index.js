@@ -19,7 +19,7 @@ const __dirname = path.resolve();
 
 // Middleware
 dotenv.config();
-app.set("trust proxy", 1);
+app.set("trust proxy", true);
 
 app.use(express.json());
 app.use(cookieParser());
