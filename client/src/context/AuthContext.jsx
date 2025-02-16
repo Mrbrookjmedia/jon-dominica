@@ -135,7 +135,7 @@ const login = async (userData) => {
     const res = await apiRequest.post("/auth/login", userData);
 
     // Refresh user data after login to ensure proper state management
-    await refreshUserData();
+    // await refreshUserData();
     
     toast.success(res.data.message);
     setCurrentUser(res.data.user);
