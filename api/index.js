@@ -19,6 +19,8 @@ const __dirname = path.resolve();
 
 // Middleware
 dotenv.config();
+app.set("trust proxy", 1);
+
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
@@ -27,9 +29,9 @@ app.use(cors({
     "https://jon-dominica.onrender.com"
   ],
   credentials: true,
-  allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
-  methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
-  exposedHeaders: ["Set-Cookie"] // Required for cookie visibility
+ allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
+  exposedHeaders: ["Set-Cookie", "Authorization"],
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"]
 }));
 
 // app.use((req, res, next) => {
