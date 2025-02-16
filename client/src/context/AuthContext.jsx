@@ -118,18 +118,40 @@ export const AuthContextProvider = ({ children }) => {
 //   };
 
 
+// const login = async (userData) => {
+//   try {
+//     const res = await apiRequest.post("/auth/login", userData);
+//     setCurrentUser(res.data.user);
+    
+//     // Force refresh to validate admin status
+//     await validateToken(); 
+//   } catch (err) {
+//     console.error("Login error:", err);
+//     throw err;
+//   }
+// };
 const login = async (userData) => {
   try {
     const res = await apiRequest.post("/auth/login", userData);
+
+    // Refresh user data after login to ensure proper state management
+    await refreshUserData();
+    
+    toast.success(res.data.message);
     setCurrentUser(res.data.user);
     
-    // Force refresh to validate admin status
-    await validateToken(); 
+    navigate("/"); // Redirect after successful login
   } catch (err) {
     console.error("Login error:", err);
+    toast.error(err.response?.data?.message || "Login failed");
     throw err;
   }
 };
+
+
+
+
+  
 // Validate token and permissions
 const validateToken = async () => {
   try {
