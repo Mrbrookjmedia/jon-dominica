@@ -22,10 +22,14 @@ dotenv.config();
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
-  origin: "https://jon-dominica-international.netlify.app",
+  origin: [
+    "https://jon-dominica-international.netlify.app",
+    "https://jon-dominica.onrender.com"
+  ],
   credentials: true,
-  allowedHeaders: ["Content-Type", "Authorization","Cache-Control"], 
-  methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"] // Add OPTIONS
+  allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+  exposedHeaders: ["Set-Cookie"] // Required for cookie visibility
 }));
 
 // app.use((req, res, next) => {
